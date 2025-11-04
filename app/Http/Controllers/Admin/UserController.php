@@ -7,6 +7,7 @@ use App\Models\User;
 use http\Env\Response;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -73,7 +74,36 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        try {
+            $validator = \Validator::make($request->all(),
+                [
+                    'first_name' => ['required', 'string', 'min:1', 'max:255'],
+                    'last_name' => ['required', 'string', 'min:1', 'max:255'],
+                    'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+                    'password' => ['nullable', 'string', 'min:8', 'max:255'],
+                ]);
+            if ($validator->fails())
+                return \response()->json([
+                    'errors' => $validator->errors()
+                ], 422);
+
+            $inputs = $validator->validated();
+            if (isset($inputs['password']))
+                $inputs['password'] = bcrypt($inputs['password']);
+
+            $user->update($inputs);
+        }catch (\Throwable $th){
+            app()[ExceptionHandler::class]->report($th);
+            return response()->json([
+                'message' => 'Something went wrong',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'User updated successfully',
+            'data' => $user
+        ]);
     }
 
     /**
