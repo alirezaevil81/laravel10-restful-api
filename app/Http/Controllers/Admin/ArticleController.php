@@ -13,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::query()->with('user:id,first_name,last_name')->get();
+        $articles = Article::query()->get();
         return response()->json([
             'data' => $articles
         ]);
