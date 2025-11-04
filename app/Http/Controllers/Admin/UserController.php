@@ -39,6 +39,14 @@ class UserController extends Controller
             return \response()->json([
                 'errors' => $validator->errors()
             ], 422);
+
+        $inputs = $validator->validated();
+        $inputs['password'] = bcrypt($inputs['password']);
+        User::create($inputs);
+
+        return response()->json([
+            'message' => 'User created successfully'
+        ]);
     }
 
     /**
