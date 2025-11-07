@@ -54,11 +54,11 @@ class UserController extends Controller
 
             $result = $this->userService->registerUser($validator->validated());
 
-            if (!$result['ok'])
+            if (!$result->ok)
                 return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
 
 
-        return ApiResponse::withMessage('User created successfully')->withData($result['data'])->build()->response();
+        return ApiResponse::withMessage('User created successfully')->withData($result->data)->build()->response();
     }
 
     /**
