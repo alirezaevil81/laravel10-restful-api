@@ -8,12 +8,18 @@ use App\Http\Resources\Admin\User\UsersListApiResource;
 use App\Models\User;
 use App\RestfulApi\ApiResponseBuilder;
 use App\RestfulApi\Facades\ApiResponse;
+use App\Services\UserService;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use mysql_xdevapi\Result;
 
 class UserController extends Controller
 {
+    public function __construct(private UserService $userService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,7 +40,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        try {
             $validator = \Validator::make($request->all(),
                 [
                     'first_name' => ['required', 'string', 'min:1', 'max:255'],
@@ -47,16 +52,13 @@ class UserController extends Controller
                     'errors' => $validator->errors()
                 ], 422);
 
-            $inputs = $validator->validated();
-            $inputs['password'] = bcrypt($inputs['password']);
-            $user = User::create($inputs);
-        }catch (\Throwable $th){
-            app()[ExceptionHandler::class]->report($th);
+            $result = $this->userService->registerUser($validator->validated());
 
-            return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
-        }
+            if (!$result['ok'])
+                return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
 
-        return ApiResponse::withMessage('User created successfully')->withData($user)->build()->response();
+
+        return ApiResponse::withMessage('User created successfully')->withData($result['data'])->build()->response();
     }
 
     /**
