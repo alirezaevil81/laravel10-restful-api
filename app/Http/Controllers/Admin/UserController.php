@@ -47,18 +47,20 @@ class UserController extends Controller
 
             $inputs = $validator->validated();
             $inputs['password'] = bcrypt($inputs['password']);
-            User::create($inputs);
+            $user = User::create($inputs);
         }catch (\Throwable $th){
             app()[ExceptionHandler::class]->report($th);
-            return response()->json([
-                'message' => 'Something went wrong',
-                'error' => $th->getMessage()
-            ], 500);
+//            return response()->json([
+//                'message' => 'Something went wrong'
+//            ], 500);
+            return $this->apiResponse(message: 'Something went wrong', status: 500);
         }
 
-        return response()->json([
-            'message' => 'User created successfully'
-        ]);
+//        return response()->json([
+//            'message' => 'User created successfully'
+//        ]);
+
+        return $this->apiResponse(message: 'User created successfully',data: $user);
     }
 
     /**
@@ -128,5 +130,14 @@ class UserController extends Controller
             'message' => 'User deleted successfully',
         ]);
 
+    }
+
+    private function apiResponse($message = null, $data = null, $status = 200)
+    {
+
+        $body = [];
+        !is_null($message) && $body['message'] = $message;
+        !is_null($data) && $body['data'] = $data;
+        return response()->json($body, $status);
     }
 }
