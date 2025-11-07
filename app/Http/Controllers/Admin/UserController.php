@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\User\UsersDetailsApiResource;
 use App\Http\Resources\Admin\User\UsersListApiResource;
 use App\Models\User;
+use App\RestfulApi\ApiResponse;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -60,7 +61,11 @@ class UserController extends Controller
 //            'message' => 'User created successfully'
 //        ]);
 
-        return $this->apiResponse(message: 'User created successfully',data: $user);
+//        return $this->apiResponse(message: 'User created successfully',data: $user);
+        $response = new ApiResponse();
+        $response->setMessage('User created successfully');
+        $response->setData($user);
+        return $response->response();
     }
 
     /**
