@@ -7,6 +7,8 @@ class ApiResponse
     private ?string $message = null;
     private mixed $data = null;
     private int $status = 200;
+    private array $appends = [];
+
     /**
      * @param string $message
      */
@@ -30,6 +32,13 @@ class ApiResponse
     {
         $this->status = $status;
     }
+    /**
+     * @param array $appends
+     */
+    public function setAppends(array $appends): void
+    {
+        $this->appends = $appends;
+    }
 
     public function response()
     {
@@ -37,6 +46,7 @@ class ApiResponse
         $body = [];
         !is_null($this->message) && $body['message'] = $this->message;
         !is_null($this->data) && $body['data'] = $this->data;
+        $body = $body + $this->appends;
         return response()->json($body, $this->status);
     }
 
