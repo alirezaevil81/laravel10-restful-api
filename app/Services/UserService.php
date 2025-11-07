@@ -2,26 +2,17 @@
 
 namespace App\Services;
 
-use App\Base\ServiceResult;
+use App\Base\ServiceWrapper;
 use App\Models\User;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class UserService
 {
-    public function registerUser(array $inputs) : ServiceResult
+    public function registerUser(array $inputs)
     {
-        try {
+        return app(ServiceWrapper::class)(function () use ($inputs) {
             $inputs['password'] = bcrypt($inputs['password']);
-            $user = User::create($inputs);
-
-
-        }catch (\Throwable $th){
-            app()[ExceptionHandler::class]->report($th);
-            return new ServiceResult(false, $th->getMessage());
-        }
-
-
-        return new ServiceResult(true, $user);
+            return User::create($inputs);
+        });
     }
 
 }
