@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\ApiRequests\Admin\User\UserStoreApiRequest;
+use App\Http\ApiRequests\Admin\User\UserUpdateApiRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\User\UsersDetailsApiResource;
 use App\Http\Resources\Admin\User\UsersListApiResource;
@@ -63,22 +64,10 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateApiRequest $request, User $user)
     {
         try {
-            $validator = Validator::make($request->all(),
-                [
-                    'first_name' => ['required', 'string', 'min:1', 'max:255'],
-                    'last_name' => ['required', 'string', 'min:1', 'max:255'],
-                    'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-                    'password' => ['nullable', 'string', 'min:8', 'max:255'],
-                ]);
-            if ($validator->fails())
-                return \response()->json([
-                    'errors' => $validator->errors()
-                ], 422);
-
-            $inputs = $validator->validated();
+            $inputs = $request->validated();
             if (isset($inputs['password']))
                 $inputs['password'] = bcrypt($inputs['password']);
 
