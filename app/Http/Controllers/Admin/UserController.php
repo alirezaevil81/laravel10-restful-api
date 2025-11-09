@@ -24,14 +24,13 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $usersQuery = User::query();
-        if ($request->has('email'))
-            $usersQuery->whereEmail($request->email);
-        $users = $usersQuery->paginate();
-        return UsersListApiResource::collection($users);
-        /*return response()->json([
-            'data' => $users
-        ]);*/
+        $result = $this->userService->getAllUsers($request->all());
+
+        if (!$result->ok)
+            return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
+
+
+        return ApiResponse::withData(UsersListApiResource::collection($result->data)->resource)->build()->response();
     }
 
     /**
@@ -53,10 +52,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return new UsersDetailsApiResource($user);
-//        return response()->json([
-//            'data' => $user
-//        ]);
+        $result = $this->userService->getUserInfo($user);
+
+        if (!$result->ok)
+            return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
+
+
+        return ApiResponse::withData(new UsersDetailsApiResource($result->data))->build()->response();
     }
 
     /**
@@ -64,24 +66,13 @@ class UserController extends Controller
      */
     public function update(UserUpdateApiRequest $request, User $user)
     {
-        try {
-            $inputs = $request->validated();
-            if (isset($inputs['password']))
-                $inputs['password'] = bcrypt($inputs['password']);
+        $result = $this->userService->updateUser($request->validated(), $user);
 
-            $user->update($inputs);
-        }catch (\Throwable $th){
-            app()[ExceptionHandler::class]->report($th);
-            return response()->json([
-                'message' => 'Something went wrong',
-                'error' => $th->getMessage()
-            ], 500);
-        }
+        if (!$result->ok)
+            return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
 
-        return response()->json([
-            'message' => 'User updated successfully',
-            'data' => $user
-        ]);
+
+        return ApiResponse::withMessage('User updated successfully')->withData($result->data)->build()->response();
     }
 
     /**
@@ -89,19 +80,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        try {
-            $user->delete();
-        }catch (\Throwable $th){
-            app()[ExceptionHandler::class]->report($th);
-            return response()->json([
-                'message' => 'Something went wrong',
-                'error' => $th->getMessage()
-            ], 500);
-        }
+        $result = $this->userService->deleteUser($user);
 
-        return response()->json([
-            'message' => 'User deleted successfully',
-        ]);
+        if (!$result->ok)
+            return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
+
+        return ApiResponse::withMessage('User deleted successfully')->build()->response();
 
     }
 
