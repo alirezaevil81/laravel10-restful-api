@@ -12,8 +12,6 @@ use App\RestfulApi\Facades\ApiResponse;
 use App\Services\UserService;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Validator;
 
 class UserController extends Controller
 {
