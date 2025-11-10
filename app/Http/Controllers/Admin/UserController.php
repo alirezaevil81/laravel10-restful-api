@@ -6,11 +6,10 @@ use App\Http\ApiRequests\Admin\User\UserStoreApiRequest;
 use App\Http\ApiRequests\Admin\User\UserUpdateApiRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\User\UsersDetailsApiResource;
-use App\Http\Resources\Admin\User\UsersListApiResource;
+use App\Http\Resources\UsersListApiResourceCollection;
 use App\Models\User;
 use App\RestfulApi\Facades\ApiResponse;
 use App\Services\UserService;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -30,7 +29,7 @@ class UserController extends Controller
             return ApiResponse::withMessage('Something went wrong')->withstatus(500)->build()->response();
 
 
-        return ApiResponse::withData(UsersListApiResource::collection($result->data)->resource)->build()->response();
+        return ApiResponse::withData(new UsersListApiResourceCollection($result->data))->build()->response();
     }
 
     /**
