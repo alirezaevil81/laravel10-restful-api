@@ -1,5 +1,9 @@
 # laravel10-restful-api
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![PHP](https://img.shields.io/badge/PHP-%5E8.1-8892BF.svg)](https://www.php.net/) [![Laravel](https://img.shields.io/badge/Laravel-^10.10-red.svg)](https://laravel.com/)
+
+Repository: https://github.com/alirezaevil81/laravel10-restful-api
+
 This repository is a Laravel 10 starter project prepared for building a RESTful API. Below you'll find information about setup, usage, API endpoints, and development notes.
 
 ## Table of Contents
@@ -39,7 +43,7 @@ This project provides a basic template for creating RESTful APIs with Laravel 10
 1. Clone the repository:
 
 ```bash
-git clone <repository-url> laravel10-restful-api
+git clone https://github.com/alirezaevil81/laravel10-restful-api.git laravel10-restful-api
 cd laravel10-restful-api
 ```
 
