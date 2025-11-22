@@ -15,13 +15,13 @@ class LoginController extends Controller
                 ->withStatus(401)
                 ->build()
                 ->response();
-
         }
 
         $user = auth()->user();
-        $token = $user->createToken('API TOKEN')->plainTextToken;
+        $token = $user->createToken($request->header('User-Agent'))->plainTextToken;
 
         return ApiResponse::withAppends([
+            'full-name' => $user->full_name,
             'token' => $token,
         ])->build()->response();
 
