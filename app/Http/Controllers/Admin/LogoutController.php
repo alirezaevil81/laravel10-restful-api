@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\RestfulApi\Facades\ApiResponse;
-use Illuminate\Http\Request;
 
 class LogoutController extends Controller
 {

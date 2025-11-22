@@ -11,6 +11,7 @@ use App\Models\User;
 use App\RestfulApi\Facades\ApiResponse;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {

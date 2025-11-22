@@ -4,6 +4,7 @@ namespace App\Http\ApiRequests\Admin\User;
 
 use App\Models\User;
 use App\RestfulApi\ApiFormRequest;
+use Illuminate\Auth\Access\Gate;
 
 class UserStoreApiRequest extends ApiFormRequest
 {
@@ -12,7 +13,7 @@ class UserStoreApiRequest extends ApiFormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('test');
     }
 
     /**
