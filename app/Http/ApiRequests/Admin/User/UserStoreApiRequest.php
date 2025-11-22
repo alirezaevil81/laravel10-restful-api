@@ -4,7 +4,7 @@ namespace App\Http\ApiRequests\Admin\User;
 
 use App\Models\User;
 use App\RestfulApi\ApiFormRequest;
-use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
 
 class UserStoreApiRequest extends ApiFormRequest
 {
