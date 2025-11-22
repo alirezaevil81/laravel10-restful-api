@@ -15,6 +15,7 @@ class LoginController extends Controller
                 ->withStatus(401)
                 ->build()
                 ->response();
+
         }
 
         $user = auth()->user();
