@@ -8,5 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', LoginController::class);
 
-Route::apiResource('users', UserController::class);
-Route::apiResource('articles', ArticleController::class)->only(['index']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('articles', ArticleController::class)->only(['index']);
+});
+

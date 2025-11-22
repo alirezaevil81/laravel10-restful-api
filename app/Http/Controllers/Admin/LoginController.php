@@ -21,7 +21,6 @@ class LoginController extends Controller
         $token = $user->createToken('API TOKEN')->plainTextToken;
 
         return ApiResponse::withAppends([
-            'name' => $user->full_name,
             'token' => $token,
         ])->build()->response();
 
