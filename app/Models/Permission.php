@@ -9,4 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Permission extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($permission) {
+            Role::whereName('admin')->first()?->permissions()->attach($permission->id);
+        });
+    }
 }
