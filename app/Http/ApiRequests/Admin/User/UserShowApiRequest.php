@@ -2,19 +2,17 @@
 
 namespace App\Http\ApiRequests\Admin\User;
 
-use App\Models\User;
 use App\RestfulApi\ApiFormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
-class UserUpdateApiRequest extends ApiFormRequest
+class UserShowApiRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Gate::allows('update_user');
+        return Gate::allows('read_user');
     }
 
     /**
@@ -24,9 +22,8 @@ class UserUpdateApiRequest extends ApiFormRequest
      */
     public function rules(): array
     {
-        return User::rules([
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id)],
-            'password' => ['nullable', 'string', 'min:8', 'max:255'],
-        ]);
+        return [
+
+        ];
     }
 }
