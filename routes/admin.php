@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\AssignRolesToUserController;
 use App\Http\Controllers\Admin\GetCurrentUserController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\LogoutController;
@@ -18,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/logout', LogoutController::class);
 
     Route::apiResource('roles', RoleController::class);
+    Route::post('users/{user}/assign-roles', AssignRolesToUserController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('articles', ArticleController::class)->only(['index']);
 });
