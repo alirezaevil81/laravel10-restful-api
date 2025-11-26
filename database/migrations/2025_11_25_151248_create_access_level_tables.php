@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('no action');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('no action');
+            $table->primary(['role_id', 'user_id']);
         });
 
         Schema::create('permissions', function (Blueprint $table) {
@@ -39,6 +40,7 @@ return new class extends Migration
             $table->unsignedBigInteger('permission_id');
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('no action');
             $table->foreign('permission_id')->references('id')->on('permissions')->onUpdate('cascade')->onDelete('no action');
+            $table->primary(['role_id', 'permission_id']);
         });
 
     }
