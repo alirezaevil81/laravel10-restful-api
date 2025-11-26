@@ -17,7 +17,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('current-user', GetCurrentUserController::class);
     Route::delete('/logout', LogoutController::class);
-
     Route::apiResource('roles', RoleController::class);
     Route::post('users/{user}/assign-roles', AssignRolesToUserController::class);
     Route::apiResource('users', UserController::class);
