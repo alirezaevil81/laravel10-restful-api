@@ -23,7 +23,14 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/admin/users",
+     *     summary="Get users list",
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of users"
+     *     )
+     * )
      */
     public function index(UserIndexApiRequest $request)
     {
