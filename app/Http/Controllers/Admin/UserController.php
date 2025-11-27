@@ -24,7 +24,8 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/admin/users",
+     *     path="/users",
+     *     tags={"Users"},
      *     summary="Get users list",
      *     @OA\Response(
      *         response=200,

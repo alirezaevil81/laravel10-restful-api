@@ -12,6 +12,10 @@ use Illuminate\Routing\Controller as BaseController;
  *     title="My API documentation",
  *     version="1.0.0"
  * )
+ * @OA\Tag(
+ *     name="Users",
+ *     description="API Endpoints for Users"
+ * )
  */
 class Controller extends BaseController
 {

@@ -4,11 +4,19 @@
         "title": "My API documentation",
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "/api/admin"
+        }
+    ],
     "paths": {
-        "/api/admin/users": {
+        "/users": {
             "get": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Get users list",
-                "operationId": "2979f0297ab881ad0b8b86ee613f077b",
+                "operationId": "9456f74ab995d6e45602d63373640651",
                 "responses": {
                     "200": {
                         "description": "List of users"
@@ -16,5 +24,11 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API Endpoints for Users"
+        }
+    ]
 }
