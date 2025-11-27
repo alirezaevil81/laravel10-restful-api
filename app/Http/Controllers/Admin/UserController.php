@@ -30,7 +30,32 @@ class UserController extends Controller
      *     summary="Get users list",
      *     @OA\Response(
      *         response=200,
-     *         description="List of users"
+     *         description="List of users",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="data",
+     *                     type="array",
+     *                     @OA\Items(
+     *                         @OA\Property(
+     *                             property="id",
+     *                             type="integer",
+     *                             nullable=false,
+     *                             example=1,
+     *                         ),
+     *                         @OA\Property(
+     *                             property="first_name",
+     *                             type="string",
+     *                             nullable=false,
+     *                             example="Ali",
+     *                         ),
+     *
+     *                     )
+     *                 ),
+     *             )
+     *         )
      *     )
      * )
      */

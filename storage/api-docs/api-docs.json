@@ -19,7 +19,39 @@
                 "operationId": "9456f74ab995d6e45602d63373640651",
                 "responses": {
                     "200": {
-                        "description": "List of users"
+                        "description": "List of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1,
+                                                                "nullable": false
+                                                            },
+                                                            "first_name": {
+                                                                "type": "string",
+                                                                "example": "Ali",
+                                                                "nullable": false
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
