@@ -9,6 +9,9 @@ use Tests\TestCase;
 
 class RegisterUserByAdminTest extends TestCase
 {
+
+    use RefreshDatabase;
+
     public function test_authentication(): void
     {
         $this->post(route('users.store'))->assertStatus(401);
@@ -27,11 +30,22 @@ class RegisterUserByAdminTest extends TestCase
     }
 
 
-    /**
-     * A basic feature test example.
-     */
     public function test_an_admin_can_register_new_user(): void
     {
+        $admin = User::whereEmail('admin@gmail.com')->first();
+        $response = $this->actingAs($admin)->post(route('users.store',[
+            'first_name' => 'Test',
+            'last_name' => 'Test pour',
+            'email' => 'test@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]));
 
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['message']);
+        $response->assertJson(['message' => 'User created successfully']);
+
+        $registeredUser = User::findOrFail($response->json('data')['id']);
+
+        $this->assertEquals($registeredUser->email, 'test@gmail.com');
     }
 }
