@@ -21,7 +21,12 @@
                     "200": {
                         "description": "List of users"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         }
     },
@@ -30,5 +35,15 @@
             "name": "Users",
             "description": "API Endpoints for Users"
         }
-    ]
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
 }

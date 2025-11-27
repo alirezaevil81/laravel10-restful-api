@@ -26,6 +26,7 @@ class UserController extends Controller
      * @OA\Get(
      *     path="/users",
      *     tags={"Users"},
+     *     security={{"sanctum":{}}},
      *     summary="Get users list",
      *     @OA\Response(
      *         response=200,
