@@ -19,13 +19,13 @@ class LoginToAdminPanelTest extends TestCase
 
     public function test_login_validation(): void
     {
-        $response = $this->post('/api/admin/login');
+        $response = $this->post(route('login'));
         $response->assertStatus(422);
     }
 
     public function test_an_admin_can_login_to_admin_panel_with_correct_data(): void
     {
-        $response = $this->post('/api/admin/login', [
+        $response = $this->post(route('login'), [
             'email' => 'admin@gmail.com',
             'password' => '12345678'
         ]);
@@ -38,7 +38,7 @@ class LoginToAdminPanelTest extends TestCase
 
     public function test_an_admin_cannot_login_to_admin_panel_with_wrong_data(): void
     {
-        $response = $this->post('/api/admin/login', [
+        $response = $this->post(route('login'), [
             'email' => 'admin@gmail.com',
             'password' => '123'
         ]);

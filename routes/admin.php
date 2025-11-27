@@ -10,15 +10,15 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('/login', LoginController::class);
+Route::post('/login', LoginController::class)->name('login');
 
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::get('current-user', GetCurrentUserController::class);
-    Route::delete('/logout', LogoutController::class);
+    Route::get('current-user', GetCurrentUserController::class)->name('current-user');
+    Route::delete('/logout', LogoutController::class)->name('logout');
     Route::apiResource('roles', RoleController::class);
-    Route::post('users/{user}/assign-roles', AssignRolesToUserController::class);
+    Route::post('users/{user}/assign-roles', AssignRolesToUserController::class)->name('users.assign-roles');
     Route::apiResource('users', UserController::class);
     Route::apiResource('articles', ArticleController::class)->only(['index']);
 });
