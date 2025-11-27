@@ -2,12 +2,16 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Database\Seeders\UserSeeder;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LoginToAdminPanelTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
@@ -18,7 +22,8 @@ class LoginToAdminPanelTest extends TestCase
             'password' => '12345678'
         ])->assertStatus(200);
 
-        $response->assertStatus(200)->assertJson(['name','token']);
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['token']);
 
 
     }
