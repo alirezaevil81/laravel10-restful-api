@@ -17,6 +17,14 @@
                 ],
                 "summary": "Get users list",
                 "operationId": "9456f74ab995d6e45602d63373640651",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "param of search",
+                        "required": false
+                    }
+                ],
                 "responses": {
                     "403": {
                         "description": "Unauthorized",

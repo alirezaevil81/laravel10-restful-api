@@ -28,6 +28,12 @@ class UserController extends Controller
      *     tags={"Users"},
      *     security={{"sanctum":{}}},
      *     summary="Get users list",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="param of search",
+     *         required=false,
+     *     ),
      *     @OA\Response(
      *         response="403",
      *         description="Unauthorized",
