@@ -25,6 +25,13 @@ use Illuminate\Routing\Controller as BaseController;
  *        example="Unauthorized"
  *     )
  * )
+ *
+ * @OA\Schema(
+ *     schema="isActiveFilterSchema",
+ *     enum={true,false},
+ *     type="boolean",
+ *     default=true,
+ * )
  */
 class Controller extends BaseController
 {

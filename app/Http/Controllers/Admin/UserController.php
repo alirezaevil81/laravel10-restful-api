@@ -34,6 +34,14 @@ class UserController extends Controller
      *         description="param of search",
      *         required=false,
      *     ),
+     *     @OA\Parameter(
+     *         name="is_active",
+     *         in="query",
+     *         description="param of search",
+     *         required=false,
+     *         @OA\Schema(ref="#/components/schemas/isActiveFilterSchema")
+     *     ),
+     *
      *     @OA\Response(
      *         response="403",
      *         description="Unauthorized",

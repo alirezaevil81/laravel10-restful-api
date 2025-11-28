@@ -23,6 +23,15 @@
                         "in": "query",
                         "description": "param of search",
                         "required": false
+                    },
+                    {
+                        "name": "is_active",
+                        "in": "query",
+                        "description": "param of search",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/isActiveFilterSchema"
+                        }
                     }
                 ],
                 "responses": {
@@ -78,6 +87,14 @@
                     }
                 },
                 "type": "object"
+            },
+            "isActiveFilterSchema": {
+                "type": "boolean",
+                "default": true,
+                "enum": [
+                    true,
+                    false
+                ]
             },
             "UsersItemSchema": {
                 "properties": {
