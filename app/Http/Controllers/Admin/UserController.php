@@ -39,19 +39,7 @@ class UserController extends Controller
      *                     property="data",
      *                     type="array",
      *                     @OA\Items(
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="integer",
-     *                             nullable=false,
-     *                             example=1,
-     *                         ),
-     *                         @OA\Property(
-     *                             property="first_name",
-     *                             type="string",
-     *                             nullable=false,
-     *                             example="Ali",
-     *                         ),
-     *
+     *                          ref="#/components/schemas/UsersItemSchema"
      *                     )
      *                 ),
      *             )

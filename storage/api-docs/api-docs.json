@@ -29,19 +29,7 @@
                                                 "data": {
                                                     "type": "array",
                                                     "items": {
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "integer",
-                                                                "example": 1,
-                                                                "nullable": false
-                                                            },
-                                                            "first_name": {
-                                                                "type": "string",
-                                                                "example": "Ali",
-                                                                "nullable": false
-                                                            }
-                                                        },
-                                                        "type": "object"
+                                                        "$ref": "#/components/schemas/UsersItemSchema"
                                                     }
                                                 }
                                             },
@@ -62,13 +50,24 @@
             }
         }
     },
-    "tags": [
-        {
-            "name": "Users",
-            "description": "API Endpoints for Users"
-        }
-    ],
     "components": {
+        "schemas": {
+            "UsersItemSchema": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": false
+                    },
+                    "full_name": {
+                        "type": "string",
+                        "example": "John Doe",
+                        "nullable": false
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "sanctum": {
                 "type": "apiKey",
@@ -77,5 +76,11 @@
                 "in": "header"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API Endpoints for Users"
+        }
+    ]
 }

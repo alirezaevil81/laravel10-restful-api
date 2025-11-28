@@ -5,6 +5,15 @@ namespace App\Http\Resources\Admin\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @OA\Schema(
+ *     schema="UsersItemSchema",
+ *     @OA\Property(property="id", type="integer",nullable=false ,example=1),
+ *     @OA\Property(property="full_name", type="string",nullable=false , example="John Doe"),
+ * )
+ */
+
+
 class UsersListApiResource extends JsonResource
 {
     /**
