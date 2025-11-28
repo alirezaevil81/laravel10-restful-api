@@ -90,7 +90,24 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/users/{id}",
+     *     description="Get user info",
+     *     summary="Get user info",
+     *     tags={"Users"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         example="1"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *     )
+     *     ),
+     * )
      */
     public function show(UserShowApiRequest $request,User $user)
     {
