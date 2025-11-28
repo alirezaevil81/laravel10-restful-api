@@ -18,6 +18,16 @@
                 "summary": "Get users list",
                 "operationId": "9456f74ab995d6e45602d63373640651",
                 "responses": {
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/403ResponseSchema"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "List of users",
                         "content": {
@@ -52,6 +62,15 @@
     },
     "components": {
         "schemas": {
+            "403ResponseSchema": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Unauthorized"
+                    }
+                },
+                "type": "object"
+            },
             "UsersItemSchema": {
                 "properties": {
                     "id": {

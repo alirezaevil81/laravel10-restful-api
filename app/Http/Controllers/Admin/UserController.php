@@ -29,6 +29,11 @@ class UserController extends Controller
      *     security={{"sanctum":{}}},
      *     summary="Get users list",
      *     @OA\Response(
+     *         response="403",
+     *         description="Unauthorized",
+     *         @OA\JsonContent(ref="#/components/schemas/403ResponseSchema")
+     *     ),
+     *     @OA\Response(
      *         response=200,
      *         description="List of users",
      *         @OA\JsonContent(
@@ -38,9 +43,7 @@ class UserController extends Controller
      *                 @OA\Property(
      *                     property="data",
      *                     type="array",
-     *                     @OA\Items(
-     *                          ref="#/components/schemas/UsersItemSchema"
-     *                     )
+     *                     @OA\Items(ref="#/components/schemas/UsersItemSchema")
      *                 ),
      *             )
      *         )

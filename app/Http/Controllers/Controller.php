@@ -16,6 +16,15 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="Users",
  *     description="API Endpoints for Users"
  * )
+ *
+ * @OA\Schema(
+ *     schema="403ResponseSchema",
+ *     @OA\Property(
+ *        property="message",
+ *        type="string",
+ *        example="Unauthorized"
+ *     )
+ * )
  */
 class Controller extends BaseController
 {
